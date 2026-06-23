@@ -1,10 +1,10 @@
-﻿from fastapi import FastAPI, Depends
+from fastapi import FastAPI 
+from fastapi import Depends
 from pydantic import BaseModel
 from fastapi import APIRouter
 from app.dependencies import authenicate_user
 from fastapi.middleware.cors import CORSMiddleware
 from .youtube import get_video_id, get_transcript, create_rag_pipeline
-import re
 
 app = FastAPI()
 
