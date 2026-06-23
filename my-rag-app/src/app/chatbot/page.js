@@ -55,7 +55,7 @@ export default function ChatbotPage() {
     setIsTyping(true);
 
     try {
-      const data = await apiFetch("/chat/", {
+      const data = await apiFetch("/api/chat/", {
         method: "POST",
         body: JSON.stringify({
           message: newUserMessage.content,

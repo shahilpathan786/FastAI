@@ -54,7 +54,7 @@ export default function YouTubePage() {
     setNotes([]);
 
     try {
-      const data = await apiFetch("/youtube-summary/", {
+      const data = await apiFetch("/api/youtube-summary/", {
         method: "POST",
         body: JSON.stringify({
           youtube_url: youtubeLink,
