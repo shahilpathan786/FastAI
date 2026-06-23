@@ -14,3 +14,4 @@ sqlalchemy
 email-validator
 langchain_text_splitters
 langchain_mistralai
+yt-dlp
