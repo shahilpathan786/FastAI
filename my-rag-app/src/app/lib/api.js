@@ -1,5 +1,5 @@
 // Centralized API fetch utility with automatic token injection
-const API_BASE_URL = "http://localhost:8000/api";
+const API_BASE_URL = "fastai-production.up.railway.app";
 
 export async function apiFetch(endpoint, options = {}) {
   const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
