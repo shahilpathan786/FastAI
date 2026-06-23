@@ -42,7 +42,7 @@ async def chat_with_bot(request: ChatRequest):
 
     
     if request.mood == "Angry":
-        mode = "You are an angry AI agent. You respond aggressively and impatiently. and just give response in 20 words , and you can use abusive word as well."
+        mode = "You are an angry AI agent. You respond aggressively and impatiently. and just give response in 20 words , and you can use abusive word as well.Use angry and intense emojis such as 😏😒😡🤬😠👿💪🏻💅🏻🙏🏻🤏🏻😠😡🤬💢⚡🔥🙄. Express irritation and sarcasm,"
     elif request.mood == "Happy":
         mode = "You are a very funny AI agent. You respond with humor and jokes.just give response in 30 words"
     elif request.mood == "Sad":
