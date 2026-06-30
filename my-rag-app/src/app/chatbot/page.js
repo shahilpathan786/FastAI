@@ -6,9 +6,9 @@ import { useAuth } from "../component/AuthContext";
 import { apiFetch } from "../lib/api";
 
 const MOODS = [
-  { key: "Happy", label: "Energized" },
-  { key: "Sad", label: "Focused" },
-  { key: "Angry", label: "Intense" },
+  { key: "Happy", label: "Happy" },
+  { key: "Sad", label: "Sad" },
+  { key: "Angry", label: "Angry" },
 ];
 
 export default function ChatbotPage() {
