@@ -6,26 +6,18 @@ import { useAuth } from "../component/AuthContext";
 import { apiFetch } from "../lib/api";
 
 const MOODS = [
-  { key: "Happy", label: "Happy" },
-  { key: "Sad", label: "Sad" },
-  { key: "Angry", label: "Angry" },
-];
-
-const SUGGESTIONS = [
-  "Explain quantum physics",
-  "Help me with calculus",
-  "What is machine learning?",
-  "History of the internet",
+  { key: "Happy", label: "Energized" },
+  { key: "Sad", label: "Focused" },
+  { key: "Angry", label: "Intense" },
 ];
 
 export default function ChatbotPage() {
   const router = useRouter();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [mode, setMode] = useState("Happy");
-  const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -39,7 +31,6 @@ export default function ChatbotPage() {
     if (savedHistory) {
       const parsed = JSON.parse(savedHistory);
       setMessages(parsed);
-      if (parsed.length > 1) setShowSuggestions(false);
     } else {
       setMessages([
         {
@@ -68,7 +59,6 @@ export default function ChatbotPage() {
     setMessages((prev) => [...prev, newUserMessage]);
     setInputValue("");
     setIsTyping(true);
-    setShowSuggestions(false);
 
     try {
       const data = await apiFetch("/api/chat/", {
@@ -94,13 +84,8 @@ export default function ChatbotPage() {
     }
   };
 
-  const handleSuggestionClick = (text) => {
-    setInputValue(text);
-  };
-
   const handleClearHistory = () => {
     localStorage.removeItem("chatHistory");
-    setShowSuggestions(true);
     setMessages([
       {
         role: "ai",
@@ -109,9 +94,7 @@ export default function ChatbotPage() {
     ]);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("chatHistory");
-    logout();
+  const handleExit = () => {
     router.push("/");
   };
 
@@ -170,10 +153,6 @@ export default function ChatbotPage() {
             >
               NEXUS AI
             </h1>
-            <p className="text-[10px] text-[#4a4a7a] uppercase tracking-[0.12em] mt-0.5 flex items-center">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 shadow-[0_0_6px_#22c55e] animate-pulse" />
-              Neural engine online &middot; {user?.name || "Student"}
-            </p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -184,7 +163,7 @@ export default function ChatbotPage() {
             Reset
           </button>
           <button
-            onClick={handleLogout}
+            onClick={handleExit}
             className="text-[11px] font-medium px-3 py-1.5 rounded-lg border border-[#2d1020] text-[#e879a0] hover:bg-[#1a0a14] hover:border-[#7c2050] transition-colors"
           >
             Exit
@@ -311,21 +290,7 @@ export default function ChatbotPage() {
           </div>
         </form>
 
-        {showSuggestions && (
-          <div className="max-w-3xl mx-auto flex gap-2 flex-wrap mt-2.5">
-            {SUGGESTIONS.map((s) => (
-              <button
-                key={s}
-                onClick={() => handleSuggestionClick(s)}
-                className="text-[11px] px-2.5 py-1 rounded-full border border-[#1a1a38] text-[#5050a0] hover:border-purple-500 hover:text-purple-300 hover:bg-[#0e0e22] transition-colors whitespace-nowrap"
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        )}
-
-        <p className="text-center text-[11px] text-[#322f76] mt-3 flex items-center justify-center gap-1.5">
+        <p className="text-center text-[11px] text-[#20203a] mt-3 flex items-center justify-center gap-1.5">
           <span>crafted by</span>
           <span
             className="font-semibold text-xs bg-clip-text text-transparent"
